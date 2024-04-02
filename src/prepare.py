@@ -1,10 +1,11 @@
 import pandas as pd
-import yaml
-# Load the data
-with open('params.yaml','r') as f:
-    params = yaml.safe_load(f)
+import pickle
+import sys
 
-file_name = params['file_location']
+sys.path.append('../')
+
+# Load the data
+file_name = 'data.csv'
 
 df = pd.read_csv('Data/' + file_name, low_memory=False)
 
@@ -20,7 +21,10 @@ for col in monthly_data.columns:
 
 # Handle the missing data
 
+# save the list of column names
+pickle.dump(monthly_data.columns, open('Ground_Truth_Data/'+'monthly_columns.pkl', 'wb'))
+
 
 # Save the monthly data
-monthly_data.to_csv('Ground_Truth_Data/'+file_name[0:11]+'_monthly.csv', index=False)
+monthly_data.to_csv('Ground_Truth_Data/'+'monthly.csv', index=False)
 

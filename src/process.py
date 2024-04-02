@@ -1,15 +1,17 @@
 import pandas as pd
-import yaml
+import pickle
+import sys
+sys.path.append('../')
 
 # Load the data
-with open('params.yaml','r') as f:
-    params = yaml.safe_load(f)
 
-file_name = params['file_location']
+
+file_name = 'data.csv'
 
 df = pd.read_csv('Data/' + file_name, low_memory=False)
 
 #Preparing the list of daily columns and extracting the data.
+month_column_names = pickle.load(open('Ground_Truth_Data/'+'monthly_columns.pkl', 'rb'))
 day_column_names = [col for col in df.columns if col[0:5] == 'Daily']
 day_column_names.append('DATE')
 
@@ -28,4 +30,4 @@ for col in day_data.columns:
 
 
 # Save the computed monthly data
-day_data.to_csv('Computed_Averages_Data/'+file_name[0:11]+'_computed_avg.csv', index=False)
+day_data.to_csv('Computed_Averages_Data/'+'computed_avg.csv', index=False)

@@ -1,11 +1,9 @@
 import pandas as pd
 from sklearn.metrics import r2_score
-import yaml
+import sys
+sys.path.append('../')
 
-with open('params.yaml','r') as f:
-    params = yaml.safe_load(f)
-
-file_name = params['file_location']
+file_name = 'data.csv'
 
 
 # Load the Ground Truth Data
@@ -18,3 +16,11 @@ print(df_ground_truth.shape, df_computed_avg.shape)
 
 
 # Compute the R2 score
+r2 = r2_score(df_ground_truth['target'], df_computed_avg['target'])
+results = {'R2 Score': r2}
+print(results)
+
+# Store the results in a txt file
+with open('Results/results.txt', 'w') as file:
+    file.write(str(results))
+

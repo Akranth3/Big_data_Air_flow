@@ -1,0 +1,31 @@
+stages:
+  download:
+    cmd: python src/download.py
+    deps:
+    - src/download.py
+    outs:
+    - Data/data.csv
+  prepare:
+    cmd: python src/prepare.py Data/data.csv
+    deps:
+    - Data/data.csv
+    - src/prepare.py
+    outs:
+    - Ground_Truth_Data/monthly.csv
+    - Ground_Truth_Data/monthly_columns.pkl
+  process:
+    cmd: python src/process.py Data/data.csv Ground_Truth_Data/monthly_columns.pkl
+    deps:
+    - Data/data.csv
+    - Ground_Truth_Data/monthly_columns.pkl
+    - src/process.py
+    outs:
+    - Computed_Averages_Data/computed_avg.csv
+  evaluate:
+    cmd: python src/evaluate.py Ground_Truth_Data/monthly.csc Computed_Averages_Data/computed_avg.csv
+    deps:
+    - Computed_Averages_Data/computed_avg.csv
+    - Ground_Truth_Data/monthly.csv
+    - src/evaluate.py
+    outs:
+    - Results/results.txt

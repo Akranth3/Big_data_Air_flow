@@ -1,6 +1,8 @@
 import pycurl
 import certifi
 import yaml
+import sys
+sys.path.append('../')
 
 c = pycurl.Curl()
 base_url = 'https://www.ncei.noaa.gov/data/local-climatological-data/access/'
