@@ -1,5 +1,6 @@
 import pandas as pd
 from sklearn.metrics import r2_score
+import yaml
 
 with open('params.yaml','r') as f:
     params = yaml.safe_load(f)

@@ -1,4 +1,5 @@
 import pandas as pd
+import yaml
 
 # Load the data
 with open('params.yaml','r') as f:
