@@ -1,0 +1,34 @@
+schema: '2.0'
+stages:
+  download:
+    cmd: python src/download.py
+    deps:
+    - path: src/download.py
+      hash: md5
+      md5: 37639166180e013db815afbc12322248
+      size: 552
+    outs:
+    - path: Data/data.csv
+      hash: md5
+      md5: 339848bfc8bd3e868f6a95cb155380cb
+      size: 4667090
+  prepare:
+    cmd: python src/prepare.py Data/data.csv
+    deps:
+    - path: Data/data.csv
+      hash: md5
+      md5: 339848bfc8bd3e868f6a95cb155380cb
+      size: 4667090
+    - path: src/prepare.py
+      hash: md5
+      md5: 025249904409c5ac549dc996fe895180
+      size: 809
+    outs:
+    - path: Ground_Truth_Data/monthly.csv
+      hash: md5
+      md5: 626b6d7ec03ee6c48d30dcf24a59b64a
+      size: 285112
+    - path: Ground_Truth_Data/monthly_columns.pkl
+      hash: md5
+      md5: f0470e9abc979c3d297c44130610d112
+      size: 1301
