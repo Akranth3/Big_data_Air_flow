@@ -18,7 +18,7 @@ url = base_url + year + file_name
 
 c.setopt(c.URL, url)
 c.setopt(c.CAINFO, certifi.where())
-with open('Data/' + file_name, 'wb') as f:
+with open('Data/data.csv', 'wb') as f:
     c.setopt(c.WRITEDATA, f)
     c.perform()
 c.close()
