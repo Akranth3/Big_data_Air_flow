@@ -32,3 +32,23 @@ stages:
       hash: md5
       md5: f0470e9abc979c3d297c44130610d112
       size: 1301
+  process:
+    cmd: python src/process.py Data/data.csv Ground_Truth_Data/monthly_columns.pkl
+    deps:
+    - path: Data/data.csv
+      hash: md5
+      md5: 339848bfc8bd3e868f6a95cb155380cb
+      size: 4667090
+    - path: Ground_Truth_Data/monthly_columns.pkl
+      hash: md5
+      md5: f0470e9abc979c3d297c44130610d112
+      size: 1301
+    - path: src/process.py
+      hash: md5
+      md5: 2d73dd5b1f4b01d4f98646f3a11af3c7
+      size: 847
+    outs:
+    - path: Computed_Averages_Data/computed_avg.csv
+      hash: md5
+      md5: 86f4e4f98b6a81b4f68f1f20e3fadf36
+      size: 192702

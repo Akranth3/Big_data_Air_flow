@@ -20,14 +20,18 @@ day_data = df[day_column_names]
 #converting the date to month
 day_data['MONTH'] = day_data['DATE'].apply(lambda x: x[5:7])
 day_data.drop('DATE', axis=1, inplace=True)
+day_data['Dummy'] = 1.0
 
-# print(day_data.columns)
+# Handle the missing data, if all the values in a column are zero then drop it
+day_data.dropna(axis=1, how='all', inplace=True)
 
-for col in day_data.columns:
-    print(col, day_data[col].isnull().sum()/len(day_data)*100)
-
-# Comute the monthly data
-
+# compute the monthly data
+for i in day_data.columns:
+    if(i!="MONTH"):
+        avg = day_data.groupby('MONTH')[i].mean()
+        day_data['Month_Avg_'+i] = day_data['MONTH'].map(avg)
+        day_data.drop(i, axis=1, inplace=True)
+        
 
 # Save the computed monthly data
 day_data.to_csv('Computed_Averages_Data/'+'computed_avg.csv', index=False)
